@@ -29,3 +29,8 @@ export type NewOrder = {
 export type UpdateOrder = {
     status?: string;
 };
+
+export interface RouteError {
+    message: string;
+    data?: string;
+}
