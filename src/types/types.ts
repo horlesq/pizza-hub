@@ -34,8 +34,12 @@ export interface OrderType {
     cart: CartItemType[];
 }
 
-export type NewOrder = {
-    items: { id: number; quantity: number }[];
+export type NewOrderType = {
+    address: string;
+    customer: string;
+    phone: string;
+    priority: boolean;
+    cart: CartItemType[];
 };
 
 export type UpdateOrder = {

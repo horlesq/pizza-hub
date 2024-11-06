@@ -1,7 +1,7 @@
 import {
     ApiResponse,
     MenuItemType,
-    NewOrder,
+    NewOrderType,
     OrderType,
     UpdateOrder,
 } from "../types/types";
@@ -28,7 +28,7 @@ export async function getOrder(id: string): Promise<OrderType> {
 }
 
 // Create a new order
-export async function createOrder(newOrder: NewOrder): Promise<OrderType> {
+export async function createOrder(newOrder: NewOrderType): Promise<OrderType> {
     try {
         const res = await fetch(`${API_URL}/order`, {
             method: "POST",
