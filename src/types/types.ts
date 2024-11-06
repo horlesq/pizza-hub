@@ -16,11 +16,23 @@ export interface MenuItemProps {
     pizza: MenuItemType;
 }
 
-export type Order = {
+export interface CartItemType {
+    pizzaId: number;
+    name: string;
+    quantity: number;
+    unitPrice: number;
+    totalPrice: number;
+}
+
+export interface OrderType {
     id: number;
-    items: MenuItemType[];
-    total: number;
-};
+    status: string;
+    priority: boolean;
+    priorityPrice: number;
+    orderPrice: number;
+    estimatedDelivery: string;
+    cart: CartItemType[];
+}
 
 export type NewOrder = {
     items: { id: number; quantity: number }[];

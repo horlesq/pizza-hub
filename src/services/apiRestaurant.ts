@@ -2,7 +2,7 @@ import {
     ApiResponse,
     MenuItemType,
     NewOrder,
-    Order,
+    OrderType,
     UpdateOrder,
 } from "../types/types";
 
@@ -19,16 +19,16 @@ export async function getMenu(): Promise<MenuItemType[]> {
 }
 
 // Fetch order by ID
-export async function getOrder(id: number): Promise<Order> {
+export async function getOrder(id: string): Promise<OrderType> {
     const res = await fetch(`${API_URL}/order/${id}`);
-    if (!res.ok) throw Error(`Couldn't find order #${id}`);
+    if (!res.ok) throw Error(`Couldn't find order number: ${id}`);
 
     const { data } = await res.json();
     return data;
 }
 
 // Create a new order
-export async function createOrder(newOrder: NewOrder): Promise<Order> {
+export async function createOrder(newOrder: NewOrder): Promise<OrderType> {
     try {
         const res = await fetch(`${API_URL}/order`, {
             method: "POST",
