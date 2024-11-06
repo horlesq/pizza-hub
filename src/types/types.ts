@@ -50,3 +50,8 @@ export interface RouteError {
     message: string;
     data?: string;
 }
+
+// Define the type for the potential form errors
+export interface OrderError {
+    phone?: string;
+}

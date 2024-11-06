@@ -1,14 +1,14 @@
 // import { useState } from "react";
 
-import { Form, redirect } from "react-router-dom";
-import { CartItemType } from "../../types/types";
+import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
+import { CartItemType, OrderError } from "../../types/types";
 import { createOrder } from "../../services/apiRestaurant";
 
 // https://uibakery.io/regex-library/phone-number
-// const isValidPhone = (str) =>
-//     /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-//         str
-//     );
+const isValidPhone = (str: string) =>
+    /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+        str
+    );
 
 const fakeCart: CartItemType[] = [
     {
@@ -36,8 +36,10 @@ const fakeCart: CartItemType[] = [
 
 export function CreateOrder() {
     // const [withPriority, setWithPriority] = useState(false);
+    const navigation = useNavigation();
+    const isSubmitting = navigation.state === "submitting";
+    const formError = useActionData() as OrderError;
     const cart = fakeCart;
-    console.log(cart);
 
     return (
         <div>
@@ -54,6 +56,7 @@ export function CreateOrder() {
                     <div>
                         <input type="tel" name="phone" required />
                     </div>
+                    {formError?.phone && <p>{formError.phone}</p>}
                 </div>
 
                 <div>
@@ -82,7 +85,9 @@ export function CreateOrder() {
                         name="cart"
                         value={JSON.stringify(cart)}
                     />
-                    <button>Order now</button>
+                    <button disabled={isSubmitting}>
+                        {isSubmitting ? "Placing order..." : "Order now"}
+                    </button>
                 </div>
             </Form>
         </div>
@@ -91,18 +96,36 @@ export function CreateOrder() {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function action({ request }: { request: Request }) {
+    // Retrieve form data from the POST request
     const formData = await request.formData();
+
+    // Convert form data entries to a plain object
     const data = Object.fromEntries(formData);
-    console.log(data);
+
+    // Construct an order object from the form data,
+    // casting each entry to the correct type
     const order = {
-        address: data.address as string,
-        customer: data.customer as string,
-        phone: data.phone as string,
-        cart: JSON.parse(data.cart as string),
-        priority: data.priority === "on",
+        address: data.address as string, // Customer address as a string
+        customer: data.customer as string, // Customer name as a string
+        phone: data.phone as string, // Customer phone number as a string
+        cart: JSON.parse(data.cart as string), // Cart data parsed from a JSON string
+        priority: data.priority === "on", // Boolean to indicate if order has priority
     };
 
+    // Initialize an errors object to track any validation issues
+    const error = {} as OrderError;
+
+    // Validate the phone number format; if invalid, add an error message
+    if (!isValidPhone(order.phone))
+        error.phone = "Please insert a valid phone number!";
+
+    // Check if there are any validation errors
+    // If errors exist, return them, preventing order creation
+    if (Object.keys(error).length > 0) return error;
+
+    // If all data is valid, create a new order in the system
     const newOrder = await createOrder(order);
 
+    // Redirect the user to the newly created order page
     return redirect(`/order/${newOrder.id}`);
 }
