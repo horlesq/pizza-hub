@@ -1,43 +1,48 @@
 import { Link } from "react-router-dom";
 
 const fakeCart = [
-    {
-        pizzaId: 12,
-        name: "Mediterranean",
-        quantity: 2,
-        unitPrice: 16,
-        totalPrice: 32,
-    },
-    {
-        pizzaId: 6,
-        name: "Vegetale",
-        quantity: 1,
-        unitPrice: 13,
-        totalPrice: 13,
-    },
-    {
-        pizzaId: 11,
-        name: "Spinach and Mushroom",
-        quantity: 1,
-        unitPrice: 15,
-        totalPrice: 15,
-    },
+  {
+    pizzaId: 12,
+    name: "Mediterranean",
+    quantity: 2,
+    unitPrice: 16,
+    totalPrice: 32,
+  },
+  {
+    pizzaId: 6,
+    name: "Vegetale",
+    quantity: 1,
+    unitPrice: 13,
+    totalPrice: 13,
+  },
+  {
+    pizzaId: 11,
+    name: "Spinach and Mushroom",
+    quantity: 1,
+    unitPrice: 15,
+    totalPrice: 15,
+  },
 ];
 
 export function Cart() {
-    const cart = fakeCart;
-    console.log(cart);
+  const cart = fakeCart;
+  console.log(cart);
 
-    return (
-        <div>
-            <Link to="/menu">&larr; Back to menu</Link>
+  return (
+    <div>
+      <Link
+        to="/menu"
+        className="text-sm font-semibold text-red-500 hover:text-red-700"
+      >
+        &larr; Back to menu
+      </Link>
 
-            <h2>Your cart, %NAME%</h2>
+      <h2>Your cart, %NAME%</h2>
 
-            <div>
-                <Link to="/order/new">Order pizzas</Link>
-                <button>Clear cart</button>
-            </div>
-        </div>
-    );
+      <div>
+        <Link to="/order/new">Order pizzas</Link>
+        <button>Clear cart</button>
+      </div>
+    </div>
+  );
 }
