@@ -48,13 +48,13 @@ export function CreateOrder() {
       <Form method="POST">
         <div>
           <label>First Name</label>
-          <input type="text" name="customer" required />
+          <input className="input" type="text" name="customer" required />
         </div>
 
         <div>
           <label>Phone number</label>
           <div>
-            <input type="tel" name="phone" required />
+            <input className="input" type="tel" name="phone" required />
           </div>
           {formError?.phone && <p>{formError.phone}</p>}
         </div>
@@ -62,12 +62,7 @@ export function CreateOrder() {
         <div>
           <label>Address</label>
           <div>
-            <input
-              className="w-full rounded-full border border-slate-200 px-4 py-1 text-sm transition-all duration-300 focus:outline-none focus:ring focus:ring-red-200"
-              type="text"
-              name="address"
-              required
-            />
+            <input className="input" type="text" name="address" required />
           </div>
         </div>
 
