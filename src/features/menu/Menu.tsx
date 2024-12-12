@@ -4,19 +4,19 @@ import { MenuItem } from "./MenuItem";
 import { MenuItemType } from "../../types/types.ts";
 
 export function Menu() {
-    const menu = useLoaderData() as MenuItemType[];
+  const menu = useLoaderData() as MenuItemType[];
 
-    return (
-        <ul>
-            {menu.map((pizza) => (
-                <MenuItem pizza={pizza} key={pizza.id} />
-            ))}
-        </ul>
-    );
+  return (
+    <ul className="divede-slate-400 divide-y px-2">
+      {menu.map((pizza) => (
+        <MenuItem pizza={pizza} key={pizza.id} />
+      ))}
+    </ul>
+  );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
-    const menu = await getMenu();
-    return menu;
+  const menu = await getMenu();
+  return menu;
 }
