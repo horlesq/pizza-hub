@@ -1,12 +1,7 @@
-import { ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { LinkButtonProps } from "../types/types";
 
-type ButtonProps = {
-  children: ReactNode;
-  to: string;
-};
-
-export function LinkButton({ children, to }: ButtonProps) {
+export function LinkButton({ children, to }: LinkButtonProps) {
   const navigate = useNavigate();
 
   if (to === "-1")
