@@ -52,6 +52,16 @@ export type UpdateOrder = {
   status?: string;
 };
 
+export type OrderItemProps = {
+  item: {
+    quantity: number;
+    name: string;
+    totalPrice: number;
+  };
+  isLoadingIngredients: boolean;
+  ingredients: string[]; 
+};
+
 // CART
 
 export type CartItemProps = {
