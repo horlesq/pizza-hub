@@ -43,31 +43,37 @@ export function CreateOrder() {
   const cart = fakeCart;
 
   return (
-    <div>
-      <h2>Ready to order? Let's go!</h2>
+    <div className="px-4 py-6">
+      <h2 className="mb-8 text-xl font-semibold">
+        Place your order now and enjoy!
+      </h2>
 
       <Form method="POST">
-        <div>
-          <label>First Name</label>
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+          <label className="sm:basis-40">First Name</label>
           <input className="input" type="text" name="customer" required />
         </div>
 
-        <div>
-          <label>Phone number</label>
-          <div>
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+          <label className="sm:basis-40">Phone number</label>
+          <div className="grow">
             <input className="input" type="tel" name="phone" required />
+            {formError?.phone && (
+              <p className="mx-20 mt-2 rounded-md bg-red-100 p-1 text-center text-xs text-red-600">
+                {formError.phone}
+              </p>
+            )}
           </div>
-          {formError?.phone && <p>{formError.phone}</p>}
         </div>
 
-        <div>
-          <label>Address</label>
-          <div>
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+          <label className="sm:basis-40">Address</label>
+          <div className="grow">
             <input className="input" type="text" name="address" required />
           </div>
         </div>
 
-        <div>
+        <div className="mb-12 flex items-center gap-5">
           <input
             className="h-6 w-6 accent-red-400 focus:outline-none"
             type="checkbox"
