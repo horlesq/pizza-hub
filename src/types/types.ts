@@ -97,6 +97,7 @@ export type ButtonProps = {
   disabled?: boolean;
   to?: string;
   type: ButtonVariant;
+  onClick?: () => void;
 };
 
 export type LinkButtonProps = {

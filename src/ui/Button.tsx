@@ -13,13 +13,27 @@ const styles = {
   small: base + "py-6 px-2 md:px-5 md:py-2 text-xs",
 };
 
-export function Button({ children, disabled = false, to, type }: ButtonProps) {
+export function Button({
+  children,
+  disabled = false,
+  to,
+  type,
+  onClick,
+}: ButtonProps) {
   // If `to` is provided, render a `Link`
   if (to)
     return (
       <Link to={to} className={styles[type]}>
         {children}
       </Link>
+    );
+
+  // If `onClick` is provided, render a `button` with onClick handler
+  if (onClick)
+    return (
+      <button onClick={onClick} disabled={disabled} className={styles[type]}>
+        {children}
+      </button>
     );
 
   // Otherwise, render a regular `button`
