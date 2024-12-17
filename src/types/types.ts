@@ -20,6 +20,17 @@ export interface MenuItemProps {
   pizza: MenuItemType;
 }
 
+// CART
+
+export type CartItemProps = {
+  item: {
+    pizzaId: number;
+    name: string;
+    quantity: number;
+    totalPrice: number;
+  };
+};
+
 export interface CartItemType {
   pizzaId: number;
   name: string;
@@ -27,6 +38,10 @@ export interface CartItemType {
   unitPrice: number;
   totalPrice: number;
 }
+
+export type CartState = {
+  cart: CartItemType[];
+};
 
 // ORDER
 
@@ -60,17 +75,6 @@ export type OrderItemProps = {
   };
   isLoadingIngredients: boolean;
   ingredients: string[];
-};
-
-// CART
-
-export type CartItemProps = {
-  item: {
-    pizzaId: number;
-    name: string;
-    quantity: number;
-    totalPrice: number;
-  };
 };
 
 // ERROR
