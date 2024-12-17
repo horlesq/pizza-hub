@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItemType, CartState } from "../../types/types";
 
-const initialState:CartState = {
+const initialState: CartState = {
   cart: [],
 };
 
@@ -38,6 +38,14 @@ const cartSlice = createSlice({
     },
   },
 });
+
+export const getTotalCartQuantity = function (state: { cart: CartState }) {
+  return state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
+};
+
+export const getTotalCartPrice = function (state: { cart: CartState }) {
+  return state.cart.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+};
 
 export const {
   addItem,
