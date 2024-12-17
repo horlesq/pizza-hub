@@ -59,7 +59,7 @@ export type OrderItemProps = {
     totalPrice: number;
   };
   isLoadingIngredients: boolean;
-  ingredients: string[]; 
+  ingredients: string[];
 };
 
 // CART
@@ -98,4 +98,10 @@ export type ButtonProps = {
 export type LinkButtonProps = {
   children: ReactNode;
   to: string;
+};
+
+// USER
+
+export type UserState = {
+  username: string;
 };
