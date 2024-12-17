@@ -52,7 +52,7 @@ export function Order() {
 
       <ul className="divide-y divide-slate-200 border-b border-t">
         {cart.map((item) => (
-          <OrderItem item={item} />
+          <OrderItem key={item.pizzaId} item={item} isLoadingIngredients={false} ingredients={[]} />
         ))}
       </ul>
 

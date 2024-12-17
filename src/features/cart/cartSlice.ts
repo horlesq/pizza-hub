@@ -39,6 +39,10 @@ const cartSlice = createSlice({
   },
 });
 
+export const getCart = function (state: { cart: CartState }) {
+  return state.cart.cart;
+};
+
 export const getTotalCartQuantity = function (state: { cart: CartState }) {
   return state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
 };

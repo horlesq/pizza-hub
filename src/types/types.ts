@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { Key, ReactNode } from "react";
 
 export interface ApiResponse<T> {
   status: string;
@@ -32,6 +32,7 @@ export type CartItemProps = {
 };
 
 export interface CartItemType {
+  key: Key | null | undefined;
   pizzaId: number;
   name: string;
   quantity: number;
