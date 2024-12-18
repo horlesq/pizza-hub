@@ -32,7 +32,7 @@ export type CartItemProps = {
 };
 
 export interface CartItemType {
-  key: Key | null | undefined;
+  key?: Key | null | undefined;
   pizzaId: number;
   name: string;
   quantity: number;
@@ -104,6 +104,10 @@ export type ButtonProps = {
 export type LinkButtonProps = {
   children: ReactNode;
   to: string;
+};
+
+export type DeleteItemProps = {
+  pizzaId: number;
 };
 
 // USER
