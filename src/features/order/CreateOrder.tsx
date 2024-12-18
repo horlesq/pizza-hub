@@ -3,7 +3,12 @@ import { createOrder } from "../../services/apiRestaurant";
 import { Button } from "../../ui/Button";
 import { useSelector } from "react-redux";
 import { getUsername } from "../user/userSlice";
-import { getCart } from "../cart/cartSlice";
+import { clearCart, getCart, getTotalCartPrice } from "../cart/cartSlice";
+import { OrderError } from "../../types/types";
+import { EmptyCart } from "../cart/EmptyCart";
+import { formatCurrency } from "../../utils/helpers";
+import { useState } from "react";
+import store from "../../store";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str: string) =>
@@ -13,11 +18,16 @@ const isValidPhone = (str: string) =>
 
 export function CreateOrder() {
   const username = useSelector(getUsername);
-  // const [withPriority, setWithPriority] = useState(false);
+  const [withPriority, setWithPriority] = useState(false);
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   const formError = useActionData() as OrderError;
   const cart = useSelector(getCart);
+  const totalCartPrice = useSelector(getTotalCartPrice);
+  const priorityPrice = withPriority ? totalCartPrice * 0.2 : 0;
+  const totalPrice = totalCartPrice + priorityPrice;
+
+  if (!cart.length) return <EmptyCart />;
 
   return (
     <div className="px-4 py-6">
@@ -56,22 +66,24 @@ export function CreateOrder() {
           </div>
         </div>
 
-        <div className="mb-12 flex items-center gap-5">
+        <div className="mb-12 flex items-center justify-center gap-5">
           <input
             className="h-6 w-6 accent-red-400 focus:outline-none"
             type="checkbox"
             name="priority"
             id="priority"
-            // value={withPriority}
-            // onChange={(e) => setWithPriority(e.target.checked)}
+            checked={withPriority}
+            onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label htmlFor="priority">Want to yo give your order priority?</label>
         </div>
 
-        <div>
+        <div className="flex justify-center">
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           <Button type="primary" disabled={isSubmitting}>
-            {isSubmitting ? "Placing order..." : "Order now"}
+            {isSubmitting
+              ? "Placing order..."
+              : `Order now for ${formatCurrency(totalPrice)}`}
           </Button>
         </div>
       </Form>
@@ -87,14 +99,13 @@ export async function action({ request }: { request: Request }) {
   // Convert form data entries to a plain object
   const data = Object.fromEntries(formData);
 
-  // Construct an order object from the form data,
-  // casting each entry to the correct type
+  // Construct an order object from the form data
   const order = {
-    address: data.address as string, // Customer address as a string
-    customer: data.customer as string, // Customer name as a string
-    phone: data.phone as string, // Customer phone number as a string
-    cart: JSON.parse(data.cart as string), // Cart data parsed from a JSON string
-    priority: data.priority === "on", // Boolean to indicate if order has priority
+    address: data.address as string,
+    customer: data.customer as string,
+    phone: data.phone as string,
+    cart: JSON.parse(data.cart as string),
+    priority: data.priority === "on",
   };
 
   // Initialize an errors object to track any validation issues
@@ -110,6 +121,9 @@ export async function action({ request }: { request: Request }) {
 
   // If all data is valid, create a new order in the system
   const newOrder = await createOrder(order);
+
+  // Clear cart
+  store.dispatch(clearCart());
 
   // Redirect the user to the newly created order page
   return redirect(`/order/${newOrder.id}`);
