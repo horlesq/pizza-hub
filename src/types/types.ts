@@ -91,7 +91,7 @@ export interface OrderError {
 
 // BUTTON
 
-export type ButtonVariant = "primary" | "secondary" | "small";
+export type ButtonVariant = "primary" | "secondary" | "small" | "round";
 
 export type ButtonProps = {
   children: ReactNode;
@@ -106,8 +106,9 @@ export type LinkButtonProps = {
   to: string;
 };
 
-export type DeleteItemProps = {
+export type ItemProps = {
   pizzaId: number;
+  currentQuantity?: number;
 };
 
 // USER

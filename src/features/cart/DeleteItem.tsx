@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
 import { Button } from "../../ui/Button";
 import { deleteItem } from "./cartSlice";
-import { DeleteItemProps } from "../../types/types";
+import { ItemProps } from "../../types/types";
 
-export function DeleteItem({ pizzaId }: DeleteItemProps) {
+export function DeleteItem({ pizzaId }: ItemProps) {
   const dispatch = useDispatch();
 
   return (
