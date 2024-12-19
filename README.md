@@ -8,8 +8,8 @@ A React application for pizza ordering, featuring a dynamic menu, real-time cart
   <img src="https://github.com/user-attachments/assets/04a5556c-f8f5-443d-9df9-a41e25a89d4a" width="400" /> 
 </p>
 <p float="left">
-  <img src="https://github.com/user-attachments/assets/e964e7d2-0da4-44bf-a3c8-e7db91b8d897" width="500" />
-  <img src="https://github.com/user-attachments/assets/8c49abce-b9bb-4c24-ba0a-fcc2578947d4" width="500" /> 
+  <img src="https://github.com/user-attachments/assets/e964e7d2-0da4-44bf-a3c8-e7db91b8d897" width="400" />
+  <img src="https://github.com/user-attachments/assets/8c49abce-b9bb-4c24-ba0a-fcc2578947d4" width="400" /> 
 </p>
 
 
