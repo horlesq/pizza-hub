@@ -10,13 +10,17 @@ import { formatCurrency } from "../../utils/helpers";
 import { useState } from "react";
 import store, { AppDispatch, RootState } from "../../store";
 
+// Utility function to validate phone number format
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str: string) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
     str,
   );
 
+// CreateOrder component handles the creation of an order by
+// collecting user details and cart data
 export function CreateOrder() {
+  // Get the user address, position, and error state from the Redux store
   const {
     username,
     status: addressStatus,
@@ -24,17 +28,31 @@ export function CreateOrder() {
     address,
     error: errorAddress,
   } = useSelector((state: RootState) => state.user);
+
+  // Set a loading state when address is being fetched
   const isLoadingAddress = addressStatus === "loading";
+
+  // Local state to track if the user selected priority order
   const [withPriority, setWithPriority] = useState(false);
+
+  // Navigation and submission states for the form
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+
+  // Action data containing form validation errors
   const formError = useActionData() as OrderError;
+
+  // Get cart and total cart price from the Redux store
   const cart = useSelector(getCart);
   const totalCartPrice = useSelector(getTotalCartPrice);
+
+  // Calculate prices
   const priorityPrice = withPriority ? totalCartPrice * 0.2 : 0;
   const totalPrice = totalCartPrice + priorityPrice;
+
   const dispatch = useDispatch<AppDispatch>();
 
+  // If the cart is empty, display an empty cart message
   if (!cart.length) return <EmptyCart />;
 
   return (

@@ -3,6 +3,8 @@ import { ItemProps } from "../../types/types";
 import { Button } from "../../ui/Button";
 import { decreaseItemQuantity, increaseItemQuantity } from "./cartSlice";
 
+// The UpdateItemQuantity component allows users to 
+// increase or decrease the quantity of an item in the cart
 export function UpdateItemQuantity({ pizzaId, currentQuantity }: ItemProps) {
   const dispatch = useDispatch();
 

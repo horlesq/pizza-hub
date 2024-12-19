@@ -3,7 +3,9 @@ import { CartOverview } from "../features/cart/CartOverview";
 import { Header } from "./Header";
 import { Loader } from "./Loader";
 
+// AppLayout main layout component that structures the application's UI
 export function AppLayout() {
+  // Get the navigation state from React Router to track loading status
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
 

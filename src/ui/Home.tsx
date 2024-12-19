@@ -3,7 +3,9 @@ import { CreateUser } from "../features/user/CreateUser";
 import { Button } from "./Button";
 import { getUsername } from "../features/user/userSlice";
 
+// Home component serves as the landing page for the application
 export function Home() {
+  // Fetch the username from the Redux store
   const username = useSelector(getUsername);
 
   return (

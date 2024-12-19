@@ -1,5 +1,6 @@
 import { LinkButton } from "../../ui/LinkButton";
 
+// The EmptyCart component renders a message when the cart is empty
 export function EmptyCart() {
   return (
     <div className="px-4 py-3">

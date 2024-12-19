@@ -11,6 +11,8 @@ import {
 import { AppLayout } from "./ui/AppLayout";
 import { NotFound } from "./ui/Error";
 
+// Define the routes for the application using `createBrowserRouter`
+// This structure maps URLs to components and manages data loading and actions
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -40,6 +42,7 @@ const router = createBrowserRouter([
   },
 ]);
 
+// Main App component that provides the router to the app using RouterProvider
 function App() {
   return <RouterProvider router={router} />;
 }

@@ -15,10 +15,15 @@ import { OrderItem } from "./OrderItem";
 import { useEffect } from "react";
 import { UpdateOrder } from "./UpdateOrder";
 
+// The Order component displays detailed information about a specific order
 export function Order() {
+  // Retrieve the order data from the loader
   const order = useLoaderData() as OrderType;
+
+  // Used to fetch data for ingredients
   const fetcher = useFetcher();
 
+  // Load menu data if it's not already loaded
   useEffect(
     function () {
       if (!fetcher.data && fetcher.state === "idle") fetcher.load("/menu");
@@ -26,7 +31,7 @@ export function Order() {
     [fetcher],
   );
 
-  // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
+  // Extract relevant order details
   const {
     id,
     status,
@@ -36,6 +41,8 @@ export function Order() {
     estimatedDelivery,
     cart,
   } = order;
+
+  // Calculate the minutes left for the order's estimated delivery
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
@@ -99,6 +106,9 @@ export function Order() {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader({ params }: LoaderFunctionArgs) {
+  // Loader function to fetch order details based on the orderId parameter in the URL
+  // It fetches the order from the API using the orderId and returns it
+  // This data will be passed to the Order component as a prop
   if (!params.orderId) return;
 
   const order = await getOrder(params.orderId);

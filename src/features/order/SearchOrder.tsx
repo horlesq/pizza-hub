@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// SearchOrder component allows users to search for an order by its ID
 export function SearchOrder() {
   const [query, setQuery] = useState<string>();
   const navigate = useNavigate();

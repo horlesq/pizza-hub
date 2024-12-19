@@ -2,10 +2,13 @@ import { ActionFunctionArgs, useFetcher } from "react-router-dom";
 import { Button } from "../../ui/Button";
 import { updateOrder } from "../../services/apiRestaurant";
 
+// UpdateOrder component provides a button to update the order's priority after submiting
 export function UpdateOrder() {
+  // Used to handle form submissions in React Router
   const fetcher = useFetcher();
 
   return (
+    // Send a PATCH request to update the order with priority status
     <fetcher.Form method="PATCH" className="text-right">
       <Button type="primary">Make priority</Button>
     </fetcher.Form>

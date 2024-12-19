@@ -1,6 +1,7 @@
 import { OrderItemProps } from "../../types/types";
 import { formatCurrency } from "../../utils/helpers";
 
+// The OrderItem component displays the details of an individual order item
 export function OrderItem({
   item,
   isLoadingIngredients,

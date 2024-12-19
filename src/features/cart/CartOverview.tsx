@@ -4,11 +4,15 @@ import { getTotalCartPrice, getTotalCartQuantity } from "./cartSlice";
 import { formatCurrency } from "../../utils/helpers";
 import { useEffect, useState } from "react";
 
+// CartOverview component for displaying a summary of the cart (quantity and price)
 export function CartOverview() {
+  // Get the total cart quantity and price from the Redux store
   const totalCartQuantity = useSelector(getTotalCartQuantity);
   const totalCartPrice = useSelector(getTotalCartPrice);
+
   const [isVisible, setIsVisible] = useState(false);
 
+  // Effect hook to update visibility based on cart quantity
   useEffect(() => {
     if (totalCartQuantity > 0) {
       setIsVisible(true);
@@ -17,6 +21,7 @@ export function CartOverview() {
     }
   }, [totalCartQuantity]);
 
+  // If the cart has no items, hide the component)
   if (!totalCartQuantity) return null;
 
   return (

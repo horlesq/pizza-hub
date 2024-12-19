@@ -2,6 +2,7 @@ import { useRouteError } from "react-router-dom";
 import { RouteError } from "../types/types";
 import { LinkButton } from "./LinkButton";
 
+// NotFound fallback component for handling route errors
 export function NotFound() {
   const error = useRouteError() as RouteError;
 

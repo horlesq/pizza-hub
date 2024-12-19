@@ -15,6 +15,8 @@ const styles = {
     "rounded-full font-bold bg-red-500 text-slate-900 hover:bg-red-400 py-1 px-3 text-xs md:px-3.5 md:py-1.5 md:text-sm",
 };
 
+// Button component that can render as a `Link` (from React Router),
+// a button with an `onClick` handler, or a standard button.
 export function Button({
   children,
   disabled = false,
