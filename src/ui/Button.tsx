@@ -10,7 +10,7 @@ const styles = {
   primary: base + "py-4 px-4 md:px-6 md:py-4",
   secondary:
     " px-4 md:px-6 md:py-3.5 inline-block py-1 rounded-full border-2 border-slate-300 font-semibold uppercase tracking-wide text-slate-500 hover:text-slate-100 transition-colors duration-300 hover:bg-slate-500 focus:bg-slate-100 focus:outline-none disabled:cursor-not-allowed",
-  small: base + "py-6 px-2 md:px-5 md:py-2 text-xs",
+  small: base + "py-6 px-2 md:px-4 md:py-2 text-xs",
   round:
     "rounded-full font-bold bg-red-500 text-slate-900 hover:bg-red-400 py-1 px-3 text-xs md:px-3.5 md:py-1.5 md:text-sm",
 };

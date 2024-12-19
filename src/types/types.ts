@@ -5,6 +5,11 @@ export interface ApiResponse<T> {
   data: T;
 }
 
+export type Coordinates = {
+  latitude: number;
+  longitude: number;
+};
+
 // MENU
 
 export interface MenuItemType {
@@ -98,7 +103,7 @@ export type ButtonProps = {
   disabled?: boolean;
   to?: string;
   type: ButtonVariant;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 };
 
 export type LinkButtonProps = {
@@ -115,4 +120,15 @@ export type ItemProps = {
 
 export type UserState = {
   username: string;
+  status: "idle" | "loading" | "succeeded" | "failed"; // Status for async actions
+  position: { latitude?: number; longitude?: number }; // Optional coordinates
+  address: string;
+  error?: string;
 };
+
+export interface GeolocationType {
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
+}
