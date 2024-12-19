@@ -70,7 +70,7 @@ export type NewOrderType = {
 };
 
 export type UpdateOrder = {
-  status?: string;
+  priority: boolean;
 };
 
 export type OrderItemProps = {
@@ -79,8 +79,8 @@ export type OrderItemProps = {
     name: string;
     totalPrice: number;
   };
-  isLoadingIngredients: boolean;
-  ingredients: string[];
+  isLoadingIngredients?: boolean;
+  ingredients?: string[];
 };
 
 // ERROR

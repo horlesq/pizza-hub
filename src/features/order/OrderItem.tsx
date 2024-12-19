@@ -7,7 +7,6 @@ export function OrderItem({
   ingredients,
 }: OrderItemProps) {
   const { quantity, name, totalPrice } = item;
-  console.log(ingredients, isLoadingIngredients);
 
   return (
     <li className="py-2">
@@ -17,6 +16,9 @@ export function OrderItem({
         </p>
         <p className="font-bold">{formatCurrency(totalPrice)}</p>
       </div>
+      <p className="text-sm capitalize italic text-slate-500 md:px-10">
+        {isLoadingIngredients ? "Loading..." : ingredients?.join(". ")}
+      </p>
     </li>
   );
 }
